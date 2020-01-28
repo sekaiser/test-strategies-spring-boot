@@ -1,0 +1,18 @@
+[background-color="#01303a"]
+== Testing Strategies
+
+=== Test Pyramid
+
+=== Unit Tests
+
+=== Component Tests
+
+=== Integration Tests
+
+=== End-to-end Tests
+
+=== Summary
+
+image::summary.png[height=100%,width=100%]
+
+

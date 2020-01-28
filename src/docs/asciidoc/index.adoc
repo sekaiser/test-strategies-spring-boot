@@ -10,43 +10,54 @@ ifndef::sourcedir[:sourcedir: ../../../demos]
 :title-slide-transition-speed: fast
 :icons: font
 
-= : Dependency Management with Gradle
+= : Testing Strategies with Spring Boot
 
 +++<h3>+++
 Publishing and release strategies
 +++<div style="font-size: 0.5em; padding-top:60px">+++
-Cédric Champeau (@CedricChampeau) & 
-Louis Jacomet (@ljacomet) - Gradle Inc.
+Sebastian Kaiser (@sk4is3r) - Crvsh GmbH
 +++</div>+++
 +++</h3>+++
 
-== Who are we?
+== Who am I?
 
-image::who-s-who.png[height=250,width=520]
+image::who-s-who.png[height=307,width=234]
 
-Dependency management team
+Backend software engineering team
 
 == Agenda
 
-* Publishing basics
-* Customizing publications
-* The Gradle component model
-* Published metadata
-* Versioning
+* Testing Strategies
+//** Unit Testing
+//** Integration Testing
+//** Component Testing
+//** End-to-End Testing
+* Spring Boot Testing Strategies
+//** Unit Testing without Spring Boot
+//** Unit Testing Controllers (MockMvc w/o context)
+//** Unit Testing Controllers (MockMvc w context)
+//** Component Testing with fake server
+//** Component Testing with real server
+//** Contract Testing
+//** End-to-End Testing
 
-include::chapters/00-intro.adoc[]
+//include::chapters/00-intro.adoc[]
 
-include::chapters/01-customizing.adoc[]
+//include::chapters/01-customizing.adoc[]
 
-include::chapters/02-component-model.adoc[]
+include::chapters/02-testing-strategies.adoc[]
 
-include::chapters/03-about-metadata.adoc[]
+include::chapters/03-testing-spring-boot.adoc[]
 
-include::chapters/04-strategies.adoc[]
+//include::chapters/03-about-metadata.adoc[]
 
-include::chapters/05-conclusion.adoc[]
+//include::chapters/04-strategies.adoc[]
+
+//include::chapters/05-conclusion.adoc[]
 
 [%notitle]
 == Thank you
 
 image::thank-you.png[background, size=cover]
+
+// https://reflectoring.io/spring-boot-data-jpa-test/
