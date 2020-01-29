@@ -4,6 +4,7 @@ ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../../../demos]
 :navigation:
 :menu:
+:layout: wide
 :status:
 :title-slide-background-image: title.png
 :title-slide-transition: zoom
@@ -40,6 +41,8 @@ Backend software engineering team
 //** Component Testing with real server
 //** Contract Testing
 //** End-to-End Testing
+* Discussion
+* Conclusion
 
 //include::chapters/00-intro.adoc[]
 
@@ -49,11 +52,13 @@ include::chapters/02-testing-strategies.adoc[]
 
 include::chapters/03-testing-spring-boot.adoc[]
 
+include::chapters/04-discussion.adoc[]
+
 //include::chapters/03-about-metadata.adoc[]
 
 //include::chapters/04-strategies.adoc[]
 
-//include::chapters/05-conclusion.adoc[]
+include::chapters/05-conclusion.adoc[]
 
 [%notitle]
 == Thank you

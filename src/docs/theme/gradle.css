@@ -254,7 +254,7 @@ section.has-dark-background h3 {
     display: block;
     padding: 5px;
     overflow: auto;
-    max-height: 400px;
+    max-height: 500px;
     word-wrap: normal;
 }
 
@@ -440,7 +440,7 @@ section.has-dark-background h3 {
 }
 
 .reveal pre code {
-    font-size: 1.6em;
+    font-size: 1.4em;
     line-height: 1.2em;
     font-weight: 400;
 }
@@ -477,3 +477,17 @@ section.has-dark-background h3 {
 
 
 
+/* ------------------------------------------------------------*/
+.col2 {
+  width:48% !important;
+  margin: 0 1% !important;
+  float:left;
+}
+/* Aufzählung nicht zentrieren im 2col layout.*/
+.reveal .col2 ol, .reveal .col2  dl, .reveal .col2  ul {
+    display:table;
+}
+
+.clear {
+    float:none;
+}
