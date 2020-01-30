@@ -3,7 +3,18 @@
 
 === Test Pyramid
 
+=== Conceptual view of microservices
+Often, microservices display similar internal structure consisting of some or all of the displayed layers.
+
+image::conceptual_view_simple.png[height=445,width=640]
+
+=== Connections between modules
+
+image::connections_microservice.png[height=480,width=640]
+
 === Unit Tests
+
+image::unit_test.png[height=100%,width=100%]
 
 === Component Tests
 

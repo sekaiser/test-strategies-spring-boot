@@ -6,7 +6,7 @@ ifndef::sourcedir[:sourcedir: ../../../demos]
 :menu:
 :layout: wide
 :status:
-:title-slide-background-image: title.png
+:title-slide-background-image: title2.png
 :title-slide-transition: zoom
 :title-slide-transition-speed: fast
 :icons: font
@@ -63,6 +63,6 @@ include::chapters/05-conclusion.adoc[]
 [%notitle]
 == Thank you
 
-image::thank-you.png[background, size=cover]
+image::thank-you2.png[background, size=cover]
 
 // https://reflectoring.io/spring-boot-data-jpa-test/

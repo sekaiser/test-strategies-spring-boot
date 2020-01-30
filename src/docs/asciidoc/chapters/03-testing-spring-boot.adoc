@@ -2,6 +2,7 @@
 == Spring Boot Testing Strategies
 
 === Two main approaches
+
 * Testing slices of your application, e.g.
 ** `@WebMvcTest` - for testing the controller layer
 ** `@JsonTest` - for testing the JSON marshalling and unmarshalling
@@ -20,7 +21,9 @@ you normally mock the request, and you want to check how your server logic react
 These kind of tests are tightly related to the Controller layer / Resources in your
 application since it's the part of Spring that takes care of handling the Http request.
 
-Inside vs outside
+**Inside-server tests:** directly test controller layer without a web server
+
+**Outside-server tests:** perform HTTP request to your application to test it.
 
 [background-color="#01303a"]
 === Unit testing without Spring Boot
@@ -50,7 +53,7 @@ test {
 [source,java]
 ----
 @RunWith(MockitoJUnitRunner.class)
-class AUnitTest {
+class ExampleUnitTest {
 
     private UnitUnderTest unit;
 
@@ -91,17 +94,7 @@ dependencies {
 ----
 
 === Testing the controller layer
-[.col2]
---
-image::tests_mockmvc_wm.png[height=380,width=100%]
---
-
-[.col2]
---
-* inside-server test
-* lightweight approach
-* does not load any context
---
+image::tests_mockmvc_wm.png[height=471,width=591]
 
 === Using MockMvc standalone
 [source,java]
@@ -116,7 +109,7 @@ class ControllerTest {
         .setContentNegotiationManager(...)
         .setControllerAdvice(...)
         .setMessageConverters(...)
-        .build();
+        .build(); // <1>
 
     @Mock
     private Dependency dependency;
@@ -127,66 +120,45 @@ class ControllerTest {
     //---- tests ----
 }
 ----
+<1> Does not load any context, context must be defined manually.
 
 === Testing the controller layer
 
-[.col2]
---
-image::tests_mockmvc_with_context_wm.png[height=380,width=100%]
---
-
-[.col2]
---
-* inside-server test
-* `WebApplicationContext` is loaded
-* context is initialized using `SpringRunner`
-* `MockMvc` instance gets autoconfigured
-* load partial context (`Controller` and surrounding configuration)
---
+image::tests_mockmvc_with_context_wm.png[height=471,width=591]
 
 === Using MockMvc with context
 [source,java]
 ----
-@RunWith(SpringRunner.class)
-@WebMvcTest(MyController.class)
+@WebMvcTest(MyController.class) // <1>
 class ControllerTest {
-
-    @Autowired
-    private MockMvc mvc;
 
     @MockBean
     private MyRepository repository;
 
     @Test
-    void testSomething() {
-        given(myRepository.get(2)).willReturn(...);
-
-        MockHttpServletResponse response = mvc.perform(
-                get("/something/2").accept(MediaType.APPLICATION_JSON)
-        ).andReturn().getResponse();
-
-        assertThat(...);
+    void exampleTest(@Autowired MockMvc mvc) { // <2>
+        given(myRepository.get(2)).willReturn("something"); // <3>
+        mvc.perform(get("/")).andExpect(status().isOk())
+            .andExpect(content().string("Hello World")); // <4> <5>
     }
 }
 ----
-[NOTE]
---
-**No server calls**. There is no web server involved and the responses we are verifying are fake.
---
+<1> Load partial context (`Controller` and surrounding configuration)
+<2> `MockMvc` instance gets autoconfigured
+<3> Use `@MockBean` to mock Spring managed dependencies
+<4> There is no web server involved, responses we are verifying are fake
+<5> Response is of type `MockHttpServletResponse`
 
 [background-color="#01303a"]
 === Test complete application
 
 === @SpringBootTest
-Supports multiple modes via WebEnvironment:
+By default, will not start a server. Use `webEnvironment` attribute to refine how your tests run:
 
-* WebEnvironment.`+NONE+`
-** Creates spring beans only, no HTTP server
-* WebEnvironment.`MOCK`
-** You do not load a real HTTP server
-** Basically it is MockMVC with application context
-* WebEnvironment.`DEFINED_PORT`
-** Testing with a real HTTP server
+* `MOCK` (default): Loads a web `ApplicationContext`, provides mock web environment, use it for mock-based testing, MockMVC with application context
+* `RANDOM_PORT`: Loads a `WebServerApplicationContext`, embedded web server started, random port
+* `DEFINED_PORT`: Loads a `WebServerApplicationContext`, embedded web server started, defined port
+* `NONE`: Loads an `ApplicationContext` but does not provide any web environment (mock or otherwise
 
 === Testing with a real web server
 
@@ -216,48 +188,44 @@ using mocks
 
 [source,java]
 ----
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ControllerTest {
+class ControllerTest {
 
     @MockBean
     private ProfileFacade facade;
 
-    @Autowired
-    private TestRestTemplate restTemplate;
-
     @Test
-    void createCert_noMatchingCustomer_returns_error_404() throws Exception {
+    void exampleTest(@Autowired TestRestTemplate restTemplate) throws Exception {
         when(facade.findUserByCustomerId(any())).thenReturn(Optional.empty());
         final HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
-        ResponseEntity<String> response = restTemplate.exchange("/abc", HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> response = restTemplate
+            .exchange("/abc", HttpMethod.GET, entity, String.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }
 ----
 [NOTE]
 --
-**Real server calls**. The responses we want to verify are now of type `ResponseEntity`.
+**Real server calls**. The responses we want to verify are of type `ResponseEntity`.
 --
 
-=== Testing with a real HTTP server
-using stub services
+=== Testing with a real web server
+Registering stubs programmatically
 
 [source,java]
 ----
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWireMock(port = 0)
-public class WiremockForDocsTests {
+class WiremockForDocsTests {
     @Autowired
     private Service service;
     @Before
-    public void setup() {
+    void setup() {
         this.service.setBase("http://localhost:"
                 + this.environment.getProperty("wiremock.server.port"));
     }
     @Test
-    public void contextLoads() throws Exception {
+    void contextLoads() throws Exception {
         stubFor(get(urlEqualTo("/resource")).willReturn(aResponse()
                 .withHeader("Content-Type", "text/plain").withBody("Hello World!")));
         assertThat(this.service.go()).isEqualTo("Hello World!");
@@ -266,21 +234,17 @@ public class WiremockForDocsTests {
 ----
 
 === Testing with a real HTTP server
-using stub services
+Registering stubs automatically
 
 [source,java]
 ----
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureWireMock(stubs="classpath:/stubs")
-public class WiremockImportApplicationTests {
-
-    @Autowired
-    private Service service;
+class WiremockImportApplicationTests {
 
     @Test
-    public void contextLoads() throws Exception {
-        assertThat(this.service.go()).isEqualTo("Hello World!");
+    void contextLoads(@Autowired Service service) throws Exception {
+        assertThat(service.go()).isEqualTo("Hello World!");
     }
 }
 ----
@@ -301,5 +265,6 @@ public class WiremockImportApplicationTests {
 
 
 
-
+=== Links
+. https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-testing-spring-boot-applications
 
