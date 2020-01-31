@@ -1,0 +1,24 @@
+[.has-dark-background, background-color="#01303a"]
+== Best Practices
+
+=== F.I.R.S.T Principles
+1. F - Fast
+2. I - Independent
+3. R - Repeatable
+4. S - Self Validating
+5. T - Timely
+// check if I can merge it with RITE
+
+=== Spring Boot Testing the R.I.T.E way
+. Readable
+. Isolated or Integrated
+. Thorough
+. Explicit
+
+=== Isolate functionality
+Isolate the functionality to be tested by limiting the context of loaded frameworks/components.
+
+Often times, it is sufficient to use jUnit without loading any additional frameworks.
+
+=== Only load slices of functionality
+Try to avoid loading the entire application context

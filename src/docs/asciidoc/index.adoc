@@ -1,20 +1,16 @@
 :revnumber: {project-version}
 :example-caption!:
 ifndef::imagesdir[:imagesdir: images]
-ifndef::sourcedir[:sourcedir: ../../../demos]
 :navigation:
 :menu:
-:layout: wide
 :status:
-:title-slide-background-image: title2.png
-:title-slide-transition: zoom
-:title-slide-transition-speed: fast
+:customcss: reveal.js/css/theme/gradle.css
 :icons: font
 
-= : Testing Strategies with Spring Boot
+= : Testing Strategies
 
 +++<h3>+++
-Publishing and release strategies
+How to apply them to Spring Boot
 +++<div style="font-size: 0.5em; padding-top:60px">+++
 Sebastian Kaiser (@sk4is3r) - Crvsh GmbH
 +++</div>+++
@@ -29,36 +25,17 @@ Backend software engineering team
 == Agenda
 
 * Testing Strategies
-//** Unit Testing
-//** Integration Testing
-//** Component Testing
-//** End-to-End Testing
 * Spring Boot Testing Strategies
-//** Unit Testing without Spring Boot
-//** Unit Testing Controllers (MockMvc w/o context)
-//** Unit Testing Controllers (MockMvc w context)
-//** Component Testing with fake server
-//** Component Testing with real server
-//** Contract Testing
-//** End-to-End Testing
 * Discussion
 * Conclusion
 
-//include::chapters/00-intro.adoc[]
+include::chapters/01-testing-strategies.adoc[]
 
-//include::chapters/01-customizing.adoc[]
+include::chapters/02-testing-spring-boot.adoc[]
 
-include::chapters/02-testing-strategies.adoc[]
+include::chapters/03-discussion.adoc[]
 
-include::chapters/03-testing-spring-boot.adoc[]
-
-include::chapters/04-discussion.adoc[]
-
-//include::chapters/03-about-metadata.adoc[]
-
-//include::chapters/04-strategies.adoc[]
-
-include::chapters/05-conclusion.adoc[]
+include::chapters/04-conclusion.adoc[]
 
 [%notitle]
 == Thank you

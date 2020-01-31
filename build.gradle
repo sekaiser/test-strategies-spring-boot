@@ -1,0 +1,95 @@
+plugins {
+    id 'org.asciidoctor.jvm.gems' version '3.1.0'
+    id 'org.asciidoctor.jvm.revealjs' version '3.1.0'
+    id 'org.kordamp.gradle.livereload' version '0.2.1'
+    id "org.asciidoctor.decktape" version "3.1.0"
+    id 'org.ajoberstar.git-publish' version '3.0.0-rc.1'
+//    id 'org.gradle.presentation.asciidoctor'
+}
+
+apply plugin: 'java'
+
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    ruby {
+        gems()
+    }
+}
+
+dependencies {
+    asciidoctorGems 'rubygems:rouge:3.13.0'
+}
+
+//presentation {
+//    githubUserName.set("sekaiser")
+//}
+
+revealjs {
+    version = '3.1.0'
+}
+
+//// how can I enforce a page per section?
+//asciidoctorPdf {
+//    dependsOn asciidoctorGemsPrepare
+//    baseDir file("${projectDir}/src/docs/asciidoc")
+//    sourceDir file("${projectDir}/src/docs/asciidoc")
+//    attributes 'revnumber': null, 'source-highlighter': 'rouge', 'media': 'prepress'
+//}
+
+asciidoctorRevealJs {
+    revealjsOptions {
+        controls = true
+        progressBar = true
+        pushToHistory = true
+        overviewMode = true
+        touchMode = true
+        slideNumber = false
+        theme = "white"
+        highlightJsThemeLocation = "${projectDir}/src/docs/asciidoc/css/highlight-theme.css"
+    }
+
+    toggleBuiltinPlugin 'pdf', true
+    toggleBuiltinPlugin 'notes', false
+
+    asciidoctorj {
+        requires 'rouge'
+        attributes 'build-gradle': file('build.gradle'),
+                'icons': 'font',
+                'imagesdir': 'images',
+                'revealjs_center': 'false',
+                'revealjs_pdfmaxpagesperslide': '1',
+                'revealjs_width': '1024',
+                'revealjs_height': '720',
+                'revealjs_margin': '0.1',
+                'revealjs_fragmentinurl': 'true',
+                'revealjs_slidenumber': 'c',
+                'revealjs_minscale': '0.2',
+                'revealjs_maxscale': '2',
+                'revealjs_transitionSpeed': 'fast',
+                'revealjs_transition': 'zoom'
+    }
+
+    baseDirFollowsSourceDir()
+    sourceDir file("${projectDir}/src/docs/asciidoc")
+    outputDir file("${projectDir}/build/slides")
+
+    resources {
+        from("${projectDir}/src/docs/asciidoc/images") {
+            include '**'
+            into 'images'
+        }
+
+        from("${projectDir}/src/docs/asciidoc/css") {
+            include 'gradle.css'
+            into 'reveal.js/css/theme'
+        }
+    }
+}
+
+// https://github.com/aalmiray/livereload-gradle-plugin
+liveReload {
+    docRoot "${projectDir}/build"
+}
