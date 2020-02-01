@@ -67,9 +67,7 @@ asciidoctorRevealJs {
                 'revealjs_fragmentinurl': 'true',
                 'revealjs_slidenumber': 'c',
                 'revealjs_minscale': '0.2',
-                'revealjs_maxscale': '2',
-                'revealjs_transitionSpeed': 'fast',
-                'revealjs_transition': 'zoom'
+                'revealjs_maxscale': '2'
     }
 
     baseDirFollowsSourceDir()

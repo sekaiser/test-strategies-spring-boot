@@ -66,6 +66,7 @@ body {
     line-height: 1.2;
     letter-spacing: normal;
     text-shadow: none;
+    text-transform: none;
     word-wrap: break-word;
 }
 
@@ -124,6 +125,8 @@ section.has-dark-background,
 section.has-dark-background h2,
 section.has-dark-background h3 {
     color: white;
+    top: 283.5px !important;
+    display: block !important;
 }
 
 /*********************************************
@@ -482,4 +485,11 @@ section.has-dark-background h3 {
 
 .print-pdf .slide-background {
     background-image: none;
+}
+
+
+.print-pdf .reveal pre code {
+    font-size: 1.2em;
+    line-height: 1.1em;
+    font-weight: 400;
 }
