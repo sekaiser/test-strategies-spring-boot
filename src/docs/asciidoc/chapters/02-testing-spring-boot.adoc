@@ -19,14 +19,19 @@
 //====
 
 ===  Server-side tests
-are the ones to verify how the server logic works. In this case,
-you normally mock the request, and you want to check how your server logic reacts.
-These kind of tests are tightly related to the Controller layer / Resources in your
-application since it's the part of Spring that takes care of handling the Http request.
+- verify server logic
+- normally mocking requests to test specific responses
+- tightly related to controller layer / resources
+- Spring takes care of handling the Http request
 
-**Inside-server tests:** directly test controller layer without a web server
+[cols="2,2"]
+|===
+|Inside-server tests
+|Outside-server tests
 
-**Outside-server tests:** perform HTTP request to your application to test it.
+|directly test controller layer without a web server
+|perform HTTP request to your application to test it
+|===
 
 [background-color="#01303a"]
 === Unit testing without Spring Boot
@@ -264,10 +269,11 @@ class WiremockImportApplicationTests {
 === How to do contract testing?
 
 === Summary
-
-
-
+- For plain unit tests, you do not need to start a Spring application.
+- Isolate functionality to be tested by limiting context of loaded frameworks/components.
+- Avoid loading the entire application context, instead load slices of functionality
+- When writing component and/or end-to-end tests, load the entire application.
 
 === Links
-. https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-testing-spring-boot-applications
-
+. https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-testing-spring-boot-applications[Testing Spring Boot Applications]
+. https://www.martinfowler.com/articles/microservice-testing/[Testing Strategies in a Microservice Architecture]

@@ -1,4 +1,4 @@
-[.has-dark-background, background-color="#01303a"]
+[.has-dark-background, background-color="#01303a", %NOTITLE]
 == Conclusion
 
 === One last word
