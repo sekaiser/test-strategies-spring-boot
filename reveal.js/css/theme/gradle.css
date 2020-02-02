@@ -493,6 +493,6 @@ section.has-dark-background h3 {
     font-weight: 400;
 }
 
-.note table {
+.note table, .colist table {
     border: 0px;
 }
