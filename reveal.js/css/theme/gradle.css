@@ -496,3 +496,7 @@ section.has-dark-background h3 {
 .note table, .colist table {
     border: 0px;
 }
+
+table.frame-all {
+    border-width: 0px;
+}
