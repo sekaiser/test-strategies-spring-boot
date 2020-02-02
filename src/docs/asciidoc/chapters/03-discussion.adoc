@@ -14,11 +14,3 @@
 . Isolated or Integrated
 . Thorough
 . Explicit
-
-=== Isolate functionality
-Isolate the functionality to be tested by limiting the context of loaded frameworks/components.
-
-Often times, it is sufficient to use jUnit without loading any additional frameworks.
-
-=== Only load slices of functionality
-Try to avoid loading the entire application context

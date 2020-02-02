@@ -48,7 +48,6 @@ asciidoctorRevealJs {
                 'imagesdir': 'images',
                 'revealjs_center': 'false',
                 'revealjs_pdfmaxpagesperslide': '1',
-                'revealjs_width': '1024',
                 'revealjs_height': '720',
                 'revealjs_margin': '0.1',
                 'revealjs_fragmentinurl': 'true',

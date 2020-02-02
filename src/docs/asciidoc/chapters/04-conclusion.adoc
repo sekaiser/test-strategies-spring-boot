@@ -1,11 +1,10 @@
-[.has-dark-background, background-color="#01303a", %NOTITLE]
-== Conclusion
+[.has-dark-background, background-color="#01303a"]
+== Keep in mind...
 
-=== One last word
-
-// Mapping to conceptual view
-
->  As you make your app more testable, it should also make the app simpler and more maintainable. TDD should improve architecture: never harm it.
+===== As you make your app more testable,
+===== it should also make the app simpler
+===== and more maintainable.
+===== TDD should improve architecture: never harm it.
 
 
 

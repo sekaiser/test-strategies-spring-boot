@@ -1,8 +1,6 @@
 [.has-dark-background, background-color="#01303a"]
 == Testing Strategies
 
-=== Test Pyramid
-
 === Conceptual view of microservices
 Often, microservices display similar internal structure consisting of some or all of the displayed layers.
 
@@ -31,6 +29,10 @@ image::outofprocess_component_test.png[height=550,width=800]
 === End-to-end Tests
 
 image::e2e_test.png[height=550,width=800]
+
+=== Test Pyramid
+
+image::test_pyramid.png[height=550,width=800]
 
 === Summary
 
