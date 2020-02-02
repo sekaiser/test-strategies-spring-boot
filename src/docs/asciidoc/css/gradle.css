@@ -492,3 +492,7 @@ section.has-dark-background h3 {
     line-height: 1.1em;
     font-weight: 400;
 }
+
+.note table {
+    border: 0px;
+}

@@ -1,10 +1,9 @@
 plugins {
     id 'org.asciidoctor.jvm.gems' version '3.1.0'
     id 'org.asciidoctor.jvm.revealjs' version '3.1.0'
-    id 'org.kordamp.gradle.livereload' version '0.2.1'
     id "org.asciidoctor.decktape" version "3.1.0"
     id 'org.ajoberstar.git-publish' version '3.0.0-rc.1'
-//    id 'org.gradle.presentation.asciidoctor'
+    id "org.ajoberstar.grgit" version "4.0.1"
 }
 
 apply plugin: 'java'
@@ -23,21 +22,9 @@ dependencies {
     asciidoctorGems 'rubygems:rouge:3.13.0'
 }
 
-//presentation {
-//    githubUserName.set("sekaiser")
-//}
-
 revealjs {
     version = '3.1.0'
 }
-
-//// how can I enforce a page per section?
-//asciidoctorPdf {
-//    dependsOn asciidoctorGemsPrepare
-//    baseDir file("${projectDir}/src/docs/asciidoc")
-//    sourceDir file("${projectDir}/src/docs/asciidoc")
-//    attributes 'revnumber': null, 'source-highlighter': 'rouge', 'media': 'prepress'
-//}
 
 asciidoctorRevealJs {
     revealjsOptions {
@@ -87,7 +74,12 @@ asciidoctorRevealJs {
     }
 }
 
-// https://github.com/aalmiray/livereload-gradle-plugin
-liveReload {
-    docRoot "${projectDir}/build"
+gitPublish {
+    branch = 'gh-pages'
+
+    contents {
+        from "$buildDir/slides"
+    }
+
+    commitMessage = 'Publishing a new page'
 }

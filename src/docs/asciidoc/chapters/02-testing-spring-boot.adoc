@@ -2,19 +2,21 @@
 [.has-dark-background, background-color="#01303a"]
 == Spring Boot Testing Strategies
 
-=== Two main approaches
+=== Approaches
 
-* Testing slices of your application, e.g.
+* Testing +auto-configured+ slices of your application, e.g.
 ** `@WebMvcTest` - for testing the controller layer
 ** `@JsonTest` - for testing the JSON marshalling and unmarshalling
 ** `@DataJpaTest` - for testing the repository layer
-* Testing complete application
+* Testing +custom configured+ slices of your application
+** `@SpringBootTest(classes = CustomConfiguration.class)` - loads custom configuration, injects all the beans
+* Testing +complete+ application
 ** `@SpringBootTest` - looks for main configuration, injects all the beans
 
-[NOTE]
-====
-https://docs.spring.io/spring-boot/docs/2.3.x/reference/html/appendix-test-auto-configuration.html#test-auto-configuration[Spring Boot Test Auto Configuration]
-====
+//[NOTE]
+//====
+//https://docs.spring.io/spring-boot/docs/2.3.x/reference/html/appendix-test-auto-configuration.html#test-auto-configuration[Spring Boot Test Auto Configuration]
+//====
 
 ===  Server-side tests
 are the ones to verify how the server logic works. In this case,

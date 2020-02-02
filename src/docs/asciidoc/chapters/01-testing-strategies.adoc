@@ -30,6 +30,8 @@ image::outofprocess_component_test.png[height=550,width=800]
 
 === End-to-end Tests
 
+image::e2e_test.png[height=550,width=800]
+
 === Summary
 
 image::summary.png[height=100%,width=100%]
