@@ -257,16 +257,23 @@ class WiremockImportApplicationTests {
 }
 ----
 
-// https://cloud.spring.io/spring-cloud-contract/reference/html/project-features.html#features-wiremock
-// https://www.freecodecamp.org/news/unit-testing-services-endpoints-and-repositories-in-spring-boot-4b7d9dc2b772/
-// https://thepracticaldeveloper.com/2017/07/31/guide-spring-boot-controller-tests/
-// https://github.com/mechero/spring-boot-testing-strategies
-// https://pivotal.io/application-modernization-recipes/testing/spring-boot-testing-best-practices
-// https://howtodoinjava.com/spring-boot2/testing/springboottest-annotation/
-// https://blog.codecentric.de/en/2017/02/integration-testing-strategies-spring-boot-microservices/
-// https://bentolor.github.io/java9to13/#/_resources
-// https://raw.githubusercontent.com/bentolor/java9to13/master/docs/presentation-language.adoc
+=== Testing with Test Containers
+You can also serve integrations via docker, all from your tests using TestContainers:
+[source,kotlin]
+----
+dependencies {
+    implementation platform('org.testcontainers:testcontainers-bom:1.13.0')
+}
+----
+- https://www.testcontainers.org/
+- https://github.com/testcontainers/testcontainers-spring-boot
+
 === How to do contract testing?
+
+Use Spring Cloud Contract + OpenApiValidationFilter
+
+See: https://springframework.guru/using-swagger-request-validator-to-validate-spring-cloud-contracts/
+
 
 === Summary
 - For plain unit tests, you do not need to start a Spring application.
@@ -277,3 +284,4 @@ class WiremockImportApplicationTests {
 === Links
 . https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-testing-spring-boot-applications[Testing Spring Boot Applications]
 . https://www.martinfowler.com/articles/microservice-testing/[Testing Strategies in a Microservice Architecture]
+. https://thepracticaldeveloper.com/2017/07/30/guide-spring-boot-controller-tests/[Guide to Testing Controllers in Spring Boot]

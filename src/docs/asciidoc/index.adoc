@@ -33,8 +33,6 @@ include::chapters/01-testing-strategies.adoc[]
 
 include::chapters/02-testing-spring-boot.adoc[]
 
-include::chapters/03-discussion.adoc[]
-
 include::chapters/04-conclusion.adoc[]
 
 [%notitle]
